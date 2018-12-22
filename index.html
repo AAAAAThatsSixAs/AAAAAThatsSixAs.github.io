@@ -3,205 +3,121 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-.material-tabs {
-  display: block;
-  float: left;
-  padding: 16px;
-  padding-top: 0;
-  width: 100%;
-  max-width: 480px;
-  left: calc(50% - 480px/2);
-  position: relative;
-  margin: 96px auto;
-  background: #fff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
-  border-radius: 2px;
-}
-@media all and (max-width: 480px) {
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-.material-tabs {
-  max-width: 100%;
-  left: 0;
-}
+body {
+   font-family: 'Open Sans', sans-serif;
+   background-color: #eeeeee;
+   padding-top: 50px;
+   line-height: 1.4;
+   font-size: 1.4em;
 }
 
-.visible {
-  position: relative;
-  opacity: 1;
-  width: 100%;
-  height: auto;
-  float: left;
-  -webkit-transition: opacity .35s ease;
-  transition: opacity .35s ease;
-  z-index: 3;
+.tabs {
+	clear: both;
+	position: relative;   
+   max-width: 650px;
+   margin: 0 auto;
+   /* you can either manually set a min-height here or do it via JS ---> */
 }
 
-.hidden {
-  position: absolute;
-  opacity: 0;
-  z-index: 0;
-  -webkit-transition: opacity 0s ease;
-  transition: opacity 0s ease;
+.tab {
+	float: left;
 }
 
-.tabbed-section__selector {
-  position: relative;
-  height: 32px;
-  top: -31.2px;
-  left: -16px;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  float: left;
+.tab label {
+	margin-right: 20px;
+	position: relative;
+	top: 0;
+	cursor: pointer;
+	color: #333;
+   text-transform: uppercase;
 }
 
-.tabbed-section__selector [class*="-tab-"] {
-  float: left;
-  display: block;
-  height: 32px;
-  line-height: 32px;
-  width: 100px;
-  text-align: center;
-  background: #fff;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  font-size: 14px;
+.tab [type=radio] {
+	display: none;   
 }
 
-.tabbed-section__selector [class*="-tab-"].active { color: #4F2CCA; }
-
-.tabbed-section__selector a:first-child { border-top-left-radius: 2px; }
-
-.tabbed-section__selector a:last-of-type { border-top-right-radius: 2px; }
-
-.tabbed-section__highlighter {
-  position: absolute;
-  z-index: 10;
-  bottom: 0;
-  height: 2px;
-  background: #4F2CCA;
-  max-width: 100px;
-  width: 100%;
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  transform: translateX(0);
-  display: block;
-  left: 0;
-  -webkit-transition: -webkit-transform 0.23s ease;
-  transition: transform 0.23s ease;
+.tab__content {
+   position: relative;
+	top: 40px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transition: opacity .2s cubic-bezier(.42,0,.34,1.01);
+	opacity: 0;
 }
 
-.tabbed-section__selector-tab-3.active ~ .tabbed-section__highlighter {
-  -webkit-transform: translateX(200px);
-  -ms-transform: translateX(200px);
-  transform: translateX(200px);
+[type=radio]:checked ~ label {
+	border-bottom: 2px solid #1d1d1d;
+	color: #1d1d1d;
+	z-index: 2;
 }
 
-.tabbed-section__selector-tab-2.active ~ .tabbed-section__highlighter {
-  -webkit-transform: translateX(100px);
-  -ms-transform: translateX(100px);
-  transform: translateX(100px);
+[type=radio]:checked ~ label ~ .tab__content {
+	z-index: 1;
+	opacity: 1;
 }
-
-.tabbed-section__selector-tab-1.active ~ .tabbed-section__highlighter {
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  transform: translateX(0);
-}
-
-.divider {
-  background: rgba(0, 0, 0, 0.1);
-  position: relative;
-  display: block;
-  float: left;
-  width: 100%;
-  height: 1px;
-  margin: 8px 0;
-  padding: 0;
-  overflow: hidden;
-}
-
 
 
 </style>
-<div class="material-tabs">
-  <div class="tabbed-section__selector">
-    <a class="tabbed-section__selector-tab-1 active" href="#">Tab 1</a>
-    <a class="tabbed-section__selector-tab-2" href="#">Tab 2</a>
-    <a class="tabbed-section__selector-tab-3" href="#">Tab 3</a>
-    <span class="tabbed-section__highlighter"></span>
-  </div>
 
 
-  <div class="tabbed-section-1 visible">
-    Section 1
-  </div>
-  <div class="tabbed-section-2 hidden">
-    Section 2
-  </div>
-  <div class="tabbed-section-3 hidden">
-    Section 3
-  </div>
+<div data-tabs class="tabs">    
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-1" checked>
+      <label for="tab-1">Tab 1</label>
+      <div class="tab__content">
+         <h4>Tab heading 1</h4>
+         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt libero ipsum, veniam magni modi exercitationem debitis ducimus assumenda ratione corporis, illum eius, laborum tempore cumque amet id perspiciatis nostrum unde?</p>
+         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, maiores.</p>
+      </div> 
+   </div>
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-2">
+      <label for="tab-2">Tab 2</label>
+      <div class="tab__content">
+         <h4>Tab heading 2</h4>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur odio cum eveniet excepturi eum provident molestias ad ipsa unde dignissimos illo porro animi earum aliquam perspiciatis id omnis, adipisci incidunt. Qui, beatae. Beatae animi totam obcaecati at quae, iste facere fuga nemo pariatur esse nihil?</p>
+         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque commodi eos voluptatem numquam pariatur deleniti repellat fugiat eligendi nulla molestiae sunt praesentium vero sequi distinctio error quibusdam maiores natus magnam, explicabo hic sed alias dolores, quis eum! Reprehenderit atque cupiditate dolorum? Saepe, doloribus veniam? Nulla!</p>
+      </div> 
+   </div>
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-3">
+      <label for="tab-3">Tab 3</label>
+      <div class="tab__content">
+         <h4>Tab heading 3</h4>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam officiis voluptas maiores deserunt ullam aliquam?</p>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, officia accusantium quod fuga porro eius animi earum excepturi omnis! Reprehenderit!</p>
+      </div> 
+   </div>
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-4">
+      <label for="tab-4">Tab 4</label>
+      <div class="tab__content">
+         <h4>Tab heading 4</h4>
+         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia exercitationem veritatis vero eaque. Nam totam dolorem sapiente ullam non sed nostrum praesentium voluptatem, ad quam libero deserunt nemo fuga hic repudiandae veritatis cupiditate, mollitia recusandae!</p>
+      </div> 
+   </div>
 </div>
 
+
+
 <script> 
-
-var $ = function (selector) {
-  return document.querySelectorAll(selector);
-};
-
-
-var tabs = [
-  '.tabbed-section__selector-tab-1',
-  '.tabbed-section__selector-tab-2',
-  '.tabbed-section__selector-tab-3'
-];
-
-var toggleTab = function(element) {
-  var parent = element.parentNode;
-  
-  $(element)[0].addEventListener('click', function(){
-    this.parentNode.childNodes[1].classList.remove('active');
-    this.parentNode.childNodes[3].classList.remove('active');
-    this.parentNode.childNodes[5].classList.remove('active');
-
-    this.classList.add('active');
+(function($, document) {
     
-    if(this.classList.contains('tabbed-section__selector-tab-1')) {
-      // and change the classes, show the first content panel
-      $('.tabbed-section-1')[0].classList.remove('hidden');
-      $('.tabbed-section-1')[0].classList.add('visible');
+      // get tallest tab__content element
+      let height = -1;
+
+		$('.tab__content').each(function() {
+			height = height > $(this).outerHeight() ? height : $(this).outerHeight();
+         $(this).css('position', 'absolute');
+		});
       
-      $('.tabbed-section-2')[0].classList.remove('visible');
-      $('.tabbed-section-2')[0].classList.add('hidden');
-       $('.tabbed-section-3')[0].classList.remove('visible');
-      $('.tabbed-section-3')[0].classList.add('hidden');
-    }
-
-    if(this.classList.contains('tabbed-section__selector-tab-2')) {
-      $('.tabbed-section-2')[0].classList.remove('hidden');
-      $('.tabbed-section-2')[0].classList.add('visible');
-      $('.tabbed-section-1')[0].classList.remove('visible');
-      $('.tabbed-section-1')[0].classList.add('hidden');
-      $('.tabbed-section-3')[0].classList.remove('visible');
-      $('.tabbed-section-3')[0].classList.add('hidden');
-    }
-    
-    if(this.classList.contains('tabbed-section__selector-tab-3')) {
-      $('.tabbed-section-3')[0].classList.remove('hidden');
-      $('.tabbed-section-3')[0].classList.add('visible');
-      $('.tabbed-section-1')[0].classList.remove('visible');
-      $('.tabbed-section-1')[0].classList.add('hidden');
-      $('.tabbed-section-2')[0].classList.remove('visible');
-      $('.tabbed-section-2')[0].classList.add('hidden');
-    }
-  });
-};
-
-for (var i = tabs.length - 1; i >= 0; i--) {
-  toggleTab(tabs[i])
-};
+      // set height of tabs + top offset
+		$('[data-tabs]').css('min-height', height + 40 + 'px');
+   
+}(jQuery, document));
 
 </script>
 </html>
