@@ -3,189 +3,205 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-$primary-blue: #1779BA;
-$accent-green: #3ADB76;
-
-.md-tabs {
-  background-color: $primary-blue;
-
-  > {
-    .mobile-nav-bar {
-      background-color: $primary-blue;
-      margin-bottom: 15px;
-
-      .title-bar-text {
-        font-size: 26px;
-      }
-
-      a {
-        color: $white;
-      }
-    }
-
-    .tabs {
-      margin: 0;
-      border: 0;
-      background: $primary-blue;
-      list-style-type: none;
-      display: table;
-      width: 100%;
-
-      > .tabs-title {
-        display: table-cell;
-        width: 25%;
-        text-align: center;
-        display: inline-block;
-
-        &.is-active {
-          > a {
-            color: $accent-green;
-            background-color: transparent;
-            outline: none;
-          }
-
-          &:nth-of-type(1) ~ .slide {
-            left: calc((100% / 4) * 0);
-          }
-
-          &:nth-of-type(2) ~ .slide {
-            left: calc((100% / 4) * 1);
-          }
-
-          &:nth-of-type(3) ~ .slide {
-            left: calc((100% / 4) * 2);
-          }
-
-          &:nth-of-type(4) ~ .slide {
-            left: calc((100% / 4) * 3);
-          }
-        }
-
-        > a {
-          color: $white;
-          font-size: 16px;
-
-          &:hover,
-          &:focus {
-            background: transparent;
-          }
-        }
-      }
-    }
-  }
-}
-
-.slide {
-  background: $accent-green;
-  width: calc(100% / 4);
-  height: 4px;
+.material-tabs {
+  display: block;
+  float: left;
+  padding: 16px;
+  padding-top: 0;
+  width: 100%;
+  max-width: 480px;
+  left: calc(50% - 480px/2);
   position: relative;
+  margin: 96px auto;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
+  border-radius: 2px;
+}
+@media all and (max-width: 480px) {
+
+.material-tabs {
+  max-width: 100%;
   left: 0;
-  top: 52px;
-  transition: left 0.3s ease-out;
+}
 }
 
-@include breakpoint(small only) {
-  .slide {
-    width: 0;
-    height: 0;
-  }
+.visible {
+  position: relative;
+  opacity: 1;
+  width: 100%;
+  height: auto;
+  float: left;
+  -webkit-transition: opacity .35s ease;
+  transition: opacity .35s ease;
+  z-index: 3;
+}
 
-  .md-tabs {
-    > .accordion {
-      margin-left: 0;
-      list-style-type: none;
+.hidden {
+  position: absolute;
+  opacity: 0;
+  z-index: 0;
+  -webkit-transition: opacity 0s ease;
+  transition: opacity 0s ease;
+}
 
-      > .accordion-item > .accordion-title {
-        position: relative;
-        display: block;
-        padding: 1.25rem 1rem;
-        border: 0;
-        font-size: 0.75rem;
-        line-height: 1;
-        background: $primary-blue;
-        color: $white;
+.tabbed-section__selector {
+  position: relative;
+  height: 32px;
+  top: -31.2px;
+  left: -16px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  float: left;
+}
 
-        &:hover {
-          background-color: $primary-blue;
-          color: $accent-green;
-          outline: none;
-        }
-      }
-    }
+.tabbed-section__selector [class*="-tab-"] {
+  float: left;
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  width: 100px;
+  text-align: center;
+  background: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
 
-    > .accordion > {
-      .is-active.accordion-item > a.accordion-title {
-        border-bottom: 4px solid $accent-green;
-        color: $accent-green;
-      }
+.tabbed-section__selector [class*="-tab-"].active { color: #4F2CCA; }
 
-      .accordion-item > .accordion-content {
-        display: none;
-        padding: 1rem;
-        border: 1px solid #e6e6e6;
-        border-top: 0px;
-        background-color: #fefefe;
-        color: #0a0a0a;
-      }
-    }
-  }
+.tabbed-section__selector a:first-child { border-top-left-radius: 2px; }
 
-  > .accordion > .accordion-item > .accordion-title:focus {
-    background-color: $primary-blue;
-    color: $accent-green;
-    outline: none;
-  }
+.tabbed-section__selector a:last-of-type { border-top-right-radius: 2px; }
+
+.tabbed-section__highlighter {
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  height: 2px;
+  background: #4F2CCA;
+  max-width: 100px;
+  width: 100%;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  display: block;
+  left: 0;
+  -webkit-transition: -webkit-transform 0.23s ease;
+  transition: transform 0.23s ease;
+}
+
+.tabbed-section__selector-tab-3.active ~ .tabbed-section__highlighter {
+  -webkit-transform: translateX(200px);
+  -ms-transform: translateX(200px);
+  transform: translateX(200px);
+}
+
+.tabbed-section__selector-tab-2.active ~ .tabbed-section__highlighter {
+  -webkit-transform: translateX(100px);
+  -ms-transform: translateX(100px);
+  transform: translateX(100px);
+}
+
+.tabbed-section__selector-tab-1.active ~ .tabbed-section__highlighter {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.divider {
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: block;
+  float: left;
+  width: 100%;
+  height: 1px;
+  margin: 8px 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 
 
 </style>
-<div class="md-tabs">
-  <div class="mobile-nav-bar title-bar">
-    <div class="title-bar-left">
-      <button class="menu-icon" type="button"></button>
-    </div>
-    <div class="title-bar-center">
-      <span class="title-bar-text">Material Design Tabs</span>
-    </div>
-    <div class="title-bar-right">
-      <button class="menu-icon" type="button"></button>
-    </div>
+<div class="material-tabs">
+  <div class="tabbed-section__selector">
+    <a class="tabbed-section__selector-tab-1 active" href="#">Tab 1</a>
+    <a class="tabbed-section__selector-tab-2" href="#">Tab 2</a>
+    <a class="tabbed-section__selector-tab-3" href="#">Tab 3</a>
+    <span class="tabbed-section__highlighter"></span>
   </div>
 
-  <ul class="tabs" data-responsive-accordion-tabs="tabs small-accordion medium-tabs large-tabs" id="collapsing-tabs" data-allow-all-closed="true" data-multi-expand="true">
-    <li class="tabs-title is-active"><a href="#panel1c" aria-selected="true">Tab 1</a></li>
-    <li class="tabs-title"><a href="#panel2c">Tab 2</a></li>
-    <li class="tabs-title"><a href="#panel3c">Tab 3</a></li>
-    <li class="tabs-title"><a href="#panel4c">Tab 4</a></li>
-    <div class="slide"></div>
-  </ul>
 
-  <div class="tabs-content" data-tabs-content="collapsing-tabs">
-    <div class="tabs-panel is-active" id="panel1c">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet pulvinar enim. Donec mattis metus a hendrerit aliquam. Nulla facilisi. Etiam facilisis, nisi eu varius gravida, tellus odio blandit mauris, et egestas neque sapien sit amet massa.
-        Morbi ullamcorper, metus nec dictum faucibus, mauris dolor semper purus, quis tincidunt sapien nibh ut tellus. Suspendisse at lectus ac dolor commodo malesuada in non elit. Donec nibh nulla, vehicula a quam quis, luctus interdum est.
-      </p>
-    </div>
-    <div class="tabs-panel" id="panel2c">
-      <p>Nunc ipsum massa, venenatis sed fringilla ut, elementum eu sapien. In eget dolor volutpat, fringilla metus et, dignissim lectus. Proin interdum sit amet odio ut varius. Nam id quam lacus. Aenean et tellus a sapien pulvinar sollicitudin. Mauris posuere
-        tellus urna, non fermentum urna scelerisque in. Nulla scelerisque est leo, non tempus purus laoreet in. Aliquam erat volutpat. Nunc nulla eros, blandit quis nunc vel, luctus fermentum nisi. Phasellus ullamcorper gravida facilisis.</p>
-    </div>
-    <div class="tabs-panel" id="panel3c">
-      <p>Donec ornare, ex quis volutpat vulputate, dui eros fermentum tellus, id eleifend velit diam non leo. Aliquam convallis vestibulum elementum. Phasellus facilisis tempus nisi eget lobortis. Duis magna sem, placerat vel tellus sed, auctor laoreet enim.
-        Integer sit amet libero rutrum, vestibulum massa at, volutpat leo. Proin id ex porta, hendrerit erat sed, fringilla urna. Phasellus hendrerit consequat arcu non pretium. Proin vel velit vitae nisl aliquet rutrum. Maecenas quis lectus sit amet
-        mi fermentum pulvinar. Mauris fermentum tortor id ipsum tristique sollicitudin.</p>
-    </div>
-    <div class="tabs-panel" id="panel4c">
-      <p>Fusce justo velit, pulvinar eu sem eu, fringilla sodales urna. Mauris mollis aliquet nibh. Suspendisse porttitor, nisi a egestas iaculis, augue metus semper tortor, eget tristique leo enim mollis libero. Integer et lacus non ipsum finibus pharetra
-        sit amet quis ipsum. Mauris vitae elementum lorem. Quisque vel mauris magna. Duis non nisl neque. Suspendisse posuere magna id risus sodales bibendum.</p>
-    </div>
+  <div class="tabbed-section-1 visible">
+    Section 1
+  </div>
+  <div class="tabbed-section-2 hidden">
+    Section 2
+  </div>
+  <div class="tabbed-section-3 hidden">
+    Section 3
   </div>
 </div>
 
-
 <script> 
+
+var $ = function (selector) {
+  return document.querySelectorAll(selector);
+};
+
+
+var tabs = [
+  '.tabbed-section__selector-tab-1',
+  '.tabbed-section__selector-tab-2',
+  '.tabbed-section__selector-tab-3'
+];
+
+var toggleTab = function(element) {
+  var parent = element.parentNode;
+  
+  $(element)[0].addEventListener('click', function(){
+    this.parentNode.childNodes[1].classList.remove('active');
+    this.parentNode.childNodes[3].classList.remove('active');
+    this.parentNode.childNodes[5].classList.remove('active');
+
+    this.classList.add('active');
+    
+    if(this.classList.contains('tabbed-section__selector-tab-1')) {
+      // and change the classes, show the first content panel
+      $('.tabbed-section-1')[0].classList.remove('hidden');
+      $('.tabbed-section-1')[0].classList.add('visible');
+      
+      $('.tabbed-section-2')[0].classList.remove('visible');
+      $('.tabbed-section-2')[0].classList.add('hidden');
+       $('.tabbed-section-3')[0].classList.remove('visible');
+      $('.tabbed-section-3')[0].classList.add('hidden');
+    }
+
+    if(this.classList.contains('tabbed-section__selector-tab-2')) {
+      $('.tabbed-section-2')[0].classList.remove('hidden');
+      $('.tabbed-section-2')[0].classList.add('visible');
+      $('.tabbed-section-1')[0].classList.remove('visible');
+      $('.tabbed-section-1')[0].classList.add('hidden');
+      $('.tabbed-section-3')[0].classList.remove('visible');
+      $('.tabbed-section-3')[0].classList.add('hidden');
+    }
+    
+    if(this.classList.contains('tabbed-section__selector-tab-3')) {
+      $('.tabbed-section-3')[0].classList.remove('hidden');
+      $('.tabbed-section-3')[0].classList.add('visible');
+      $('.tabbed-section-1')[0].classList.remove('visible');
+      $('.tabbed-section-1')[0].classList.add('hidden');
+      $('.tabbed-section-2')[0].classList.remove('visible');
+      $('.tabbed-section-2')[0].classList.add('hidden');
+    }
+  });
+};
+
+for (var i = tabs.length - 1; i >= 0; i--) {
+  toggleTab(tabs[i])
+};
 
 </script>
 </html>
