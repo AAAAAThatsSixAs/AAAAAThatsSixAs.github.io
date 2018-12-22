@@ -3,166 +3,189 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,600,600italic,700,700italic);
-body {
-		font-family: 'Roboto';
-		background-color: #f9f9f9;
+$primary-blue: #1779BA;
+$accent-green: #3ADB76;
+
+.md-tabs {
+  background-color: $primary-blue;
+
+  > {
+    .mobile-nav-bar {
+      background-color: $primary-blue;
+      margin-bottom: 15px;
+
+      .title-bar-text {
+        font-size: 26px;
+      }
+
+      a {
+        color: $white;
+      }
+    }
+
+    .tabs {
+      margin: 0;
+      border: 0;
+      background: $primary-blue;
+      list-style-type: none;
+      display: table;
+      width: 100%;
+
+      > .tabs-title {
+        display: table-cell;
+        width: 25%;
+        text-align: center;
+        display: inline-block;
+
+        &.is-active {
+          > a {
+            color: $accent-green;
+            background-color: transparent;
+            outline: none;
+          }
+
+          &:nth-of-type(1) ~ .slide {
+            left: calc((100% / 4) * 0);
+          }
+
+          &:nth-of-type(2) ~ .slide {
+            left: calc((100% / 4) * 1);
+          }
+
+          &:nth-of-type(3) ~ .slide {
+            left: calc((100% / 4) * 2);
+          }
+
+          &:nth-of-type(4) ~ .slide {
+            left: calc((100% / 4) * 3);
+          }
+        }
+
+        > a {
+          color: $white;
+          font-size: 16px;
+
+          &:hover,
+          &:focus {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
 }
 
-.container{
-	height:500px;
-	width:580px;
-	padding:0;
-	margin:10px;
-	border-radius:5px;
-	box-shadow: 0 2px 3px rgba(0,0,0,.3)
-	
+.slide {
+  background: $accent-green;
+  width: calc(100% / 4);
+  height: 4px;
+  position: relative;
+  left: 0;
+  top: 52px;
+  transition: left 0.3s ease-out;
 }
 
-header {
-		position: relative;
+@include breakpoint(small only) {
+  .slide {
+    width: 0;
+    height: 0;
+  }
+
+  .md-tabs {
+    > .accordion {
+      margin-left: 0;
+      list-style-type: none;
+
+      > .accordion-item > .accordion-title {
+        position: relative;
+        display: block;
+        padding: 1.25rem 1rem;
+        border: 0;
+        font-size: 0.75rem;
+        line-height: 1;
+        background: $primary-blue;
+        color: $white;
+
+        &:hover {
+          background-color: $primary-blue;
+          color: $accent-green;
+          outline: none;
+        }
+      }
+    }
+
+    > .accordion > {
+      .is-active.accordion-item > a.accordion-title {
+        border-bottom: 4px solid $accent-green;
+        color: $accent-green;
+      }
+
+      .accordion-item > .accordion-content {
+        display: none;
+        padding: 1rem;
+        border: 1px solid #e6e6e6;
+        border-top: 0px;
+        background-color: #fefefe;
+        color: #0a0a0a;
+      }
+    }
+  }
+
+  > .accordion > .accordion-item > .accordion-title:focus {
+    background-color: $primary-blue;
+    color: $accent-green;
+    outline: none;
+  }
 }
 
-.hide {
-		display: none;
-}
 
-.tab-content {
-		padding:25px;
-}
-
-#material-tabs {
-		position: relative;
-		display: block;
-	  padding:0;
-		border-bottom: 1px solid #e0e0e0;
-}
-
-#material-tabs>a {
-		position: relative;
-	 display:inline-block;
-		text-decoration: none;
-		padding: 22px;
-		text-transform: uppercase;
-		font-size: 14px;
-		font-weight: 600;
-		color: #424f5a;
-		text-align: center;
-		outline:;
-}
-
-#material-tabs>a.active {
-		font-weight: 700;
-		outline:none;
-}
-
-#material-tabs>a:not(.active):hover {
-		background-color: inherit;
-		color: #7c848a;
-}
-
-@media only screen and (max-width: 520px) {
-		.nav-tabs#material-tabs>li>a {
-				font-size: 11px;
-		}
-}
-
-.yellow-bar {
-		position: absolute;
-		z-index: 10;
-		bottom: 0;
-		height: 3px;
-		background: #458CFF;
-		display: block;
-		left: 0;
-		transition: left .2s ease;
-		-webkit-transition: left .2s ease;
-}
-
-#tab1-tab.active ~ span.yellow-bar {
-		left: 0;
-		width: 160px;
-}
-
-#tab2-tab.active ~ span.yellow-bar {
-		left:165px;
-		width: 82px;
-}
-
-#tab3-tab.active ~ span.yellow-bar {
-		left: 253px;
-		width: 135px;
-}
-
-#tab4-tab.active ~ span.yellow-bar {
-		left:392px;
-		width: 163px;
-}
 
 </style>
-<div class="container">
-		<header>
-				<div id="material-tabs">
-						<a id="tab1-tab" href="#tab1" class="active">DEFISCALISATION</a>
-						<a id="tab2-tab" href="#tab2">AUDIT</a>
-						<a id="tab3-tab" href="#tab3">DECLARATION</a>
-						<a id="tab4-tab" href="#tab4">GESTION D'ACTIFS</a>
-						<span class="yellow-bar"></span>
-				</div>
-		</header>
+<div class="md-tabs">
+  <div class="mobile-nav-bar title-bar">
+    <div class="title-bar-left">
+      <button class="menu-icon" type="button"></button>
+    </div>
+    <div class="title-bar-center">
+      <span class="title-bar-text">Material Design Tabs</span>
+    </div>
+    <div class="title-bar-right">
+      <button class="menu-icon" type="button"></button>
+    </div>
+  </div>
 
-		<div class="tab-content">
-				<div id="tab1">
-						<p>There are three basic ideas invoved in creating these tabs:</p>
-						<ol>
-								<li>Use anchor tags as tabs.</li>
-								<li>Use a span class for the tab highlight.</li>
-							<li>In your CSS, adjust the <strong>position</strong> of the highlight, as well as it's <strong>width</strong>, by detecting the anchor tag with an 'active' class. Then adjust its left property and width property. Add a transition in your CSS, <em>et voil&agrave;</em>.</li>
-						</ol>
-				</div>
-				<div id="tab2">
-						<p>Second tab content.</p>
-				</div>
-				<div id="tab3">
-						<p>Third tab content.</p>
-				</div>
-							<div id="tab4">
-						<p>Third tab content.</p>
-				</div>
-		</div>
+  <ul class="tabs" data-responsive-accordion-tabs="tabs small-accordion medium-tabs large-tabs" id="collapsing-tabs" data-allow-all-closed="true" data-multi-expand="true">
+    <li class="tabs-title is-active"><a href="#panel1c" aria-selected="true">Tab 1</a></li>
+    <li class="tabs-title"><a href="#panel2c">Tab 2</a></li>
+    <li class="tabs-title"><a href="#panel3c">Tab 3</a></li>
+    <li class="tabs-title"><a href="#panel4c">Tab 4</a></li>
+    <div class="slide"></div>
+  </ul>
+
+  <div class="tabs-content" data-tabs-content="collapsing-tabs">
+    <div class="tabs-panel is-active" id="panel1c">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet pulvinar enim. Donec mattis metus a hendrerit aliquam. Nulla facilisi. Etiam facilisis, nisi eu varius gravida, tellus odio blandit mauris, et egestas neque sapien sit amet massa.
+        Morbi ullamcorper, metus nec dictum faucibus, mauris dolor semper purus, quis tincidunt sapien nibh ut tellus. Suspendisse at lectus ac dolor commodo malesuada in non elit. Donec nibh nulla, vehicula a quam quis, luctus interdum est.
+      </p>
+    </div>
+    <div class="tabs-panel" id="panel2c">
+      <p>Nunc ipsum massa, venenatis sed fringilla ut, elementum eu sapien. In eget dolor volutpat, fringilla metus et, dignissim lectus. Proin interdum sit amet odio ut varius. Nam id quam lacus. Aenean et tellus a sapien pulvinar sollicitudin. Mauris posuere
+        tellus urna, non fermentum urna scelerisque in. Nulla scelerisque est leo, non tempus purus laoreet in. Aliquam erat volutpat. Nunc nulla eros, blandit quis nunc vel, luctus fermentum nisi. Phasellus ullamcorper gravida facilisis.</p>
+    </div>
+    <div class="tabs-panel" id="panel3c">
+      <p>Donec ornare, ex quis volutpat vulputate, dui eros fermentum tellus, id eleifend velit diam non leo. Aliquam convallis vestibulum elementum. Phasellus facilisis tempus nisi eget lobortis. Duis magna sem, placerat vel tellus sed, auctor laoreet enim.
+        Integer sit amet libero rutrum, vestibulum massa at, volutpat leo. Proin id ex porta, hendrerit erat sed, fringilla urna. Phasellus hendrerit consequat arcu non pretium. Proin vel velit vitae nisl aliquet rutrum. Maecenas quis lectus sit amet
+        mi fermentum pulvinar. Mauris fermentum tortor id ipsum tristique sollicitudin.</p>
+    </div>
+    <div class="tabs-panel" id="panel4c">
+      <p>Fusce justo velit, pulvinar eu sem eu, fringilla sodales urna. Mauris mollis aliquet nibh. Suspendisse porttitor, nisi a egestas iaculis, augue metus semper tortor, eget tristique leo enim mollis libero. Integer et lacus non ipsum finibus pharetra
+        sit amet quis ipsum. Mauris vitae elementum lorem. Quisque vel mauris magna. Duis non nisl neque. Suspendisse posuere magna id risus sodales bibendum.</p>
+    </div>
+  </div>
 </div>
-<!-- end container -->
 
 
 <script> 
-$(document).ready(function() {
-		$('#material-tabs').each(function() {
 
-				var $active, $content, $links = $(this).find('a');
-
-				$active = $($links[0]);
-				$active.addClass('active');
-
-				$content = $($active[0].hash);
-
-				$links.not($active).each(function() {
-						$(this.hash).hide();
-				});
-
-				$(this).on('click', 'a', function(e) {
-
-						$active.removeClass('active');
-						$content.hide();
-
-						$active = $(this);
-						$content = $(this.hash);
-
-						$active.addClass('active');
-						$content.show();
-
-						e.preventDefault();
-				});
-		});
-});
 </script>
 </html>
