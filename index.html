@@ -3,96 +3,115 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 	body {
-		background-color: #eeeeee;
-		margin:1em auto;
-		max-width:40em;
-		padding:0 .62em;
-		font:1.2em/1.62 sans-serif;
+	   font-family: 'Open Sans', sans-serif;
+	   background-color: #C2EABA;
+	   padding-top: 50px;
+	   line-height: 1.4;
+	   font-size: 1.4em;
 	}
 
-	/* Style tab links */
-	.tablink {
-		background-color: #555;
-		color: #eeeeee;
+	.tabs {
+		clear: both;
+		position: relative;   
+	   max-width: 650px;
+	   margin: 0 auto;
+	   /* you can either manually set a min-height here or do it via JS ---> */
+	}
+
+	.tab {
 		float: left;
-		border: none;
-		outline: none;
+	}
+
+	.tab label {
+		margin-right: 20px;
+		position: relative;
+		top: 0;
 		cursor: pointer;
-		padding: 14px 16px;
-		font-size: 17px;
-		width: 25%;
+		color: #333;
+	   text-transform: uppercase;
 	}
 
-	.tablink:hover {
-		background-color: #777;
+	.tab [type=radio] {
+		display: none;   
 	}
 
-	/* Style the tab content (and add height:100% for full page content) */
-	.tabcontent {
-		color: black;
-		display: none;
-		padding: 100px 20px;
-		height: 100%;
-		font:1.2em/1.62 sans-serif;
+	.tab__content {
+	   position: relative;
+		top: 40px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transition: opacity .2s cubic-bezier(.42,0,.34,1.01);
+		opacity: 0;
 	}
 
-	#Home {background-color: #eeeeee;}
-	#News {background-color: #eeeeee;}
-	#Contact {background-color: #eeeeee;}
-	#About {background-color: #eeeeee;}
+	[type=radio]:checked ~ label {
+		border-bottom: 2px solid #1d1d1d;
+		color: #1d1d1d;
+		z-index: 2;
+	}
 
-
+	[type=radio]:checked ~ label ~ .tab__content {
+		z-index: 1;
+		opacity: 1;
+	}
 </style>
 
-<button class="tablink" onclick="openPage('Home', this, 'green')" id="defaultOpen">Home</button>
-<button class="tablink" onclick="openPage('News', this, 'red')">News</button>
-<button class="tablink" onclick="openPage('Contact', this, 'blue')">Contact</button>
-<button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
-
-<div id="Home" class="tabcontent">
-	<h3>Home</h3>
-	<p>Hi it's Janarth :)</p>
-</div>
-
-<div id="News" class="tabcontent">
-	<h3>News</h3>
-	<p>Some news this fine day!</p> 
-</div>
-
-<div id="Contact" class="tabcontent">
-	<h3>Contact</h3>
-	<p>Get in touch, or swing by for a cup of coffee.</p>
-</div>
-
-<div id="About" class="tabcontent">
-	<h3>About</h3>
-	<p>Who we are and what we do.</p>
+<div data-tabs class="tabs">    
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-1" checked>
+      <label for="tab-1">Tab 1</label>
+      <div class="tab__content">
+         <h4>Tab heading 1</h4>
+         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt libero ipsum, veniam magni modi exercitationem debitis ducimus assumenda ratione corporis, illum eius, laborum tempore cumque amet id perspiciatis nostrum unde?</p>
+         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, maiores.</p>
+      </div> 
+   </div>
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-2">
+      <label for="tab-2">Tab 2</label>
+      <div class="tab__content">
+         <h4>Tab heading 2</h4>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur odio cum eveniet excepturi eum provident molestias ad ipsa unde dignissimos illo porro animi earum aliquam perspiciatis id omnis, adipisci incidunt. Qui, beatae. Beatae animi totam obcaecati at quae, iste facere fuga nemo pariatur esse nihil?</p>
+         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque commodi eos voluptatem numquam pariatur deleniti repellat fugiat eligendi nulla molestiae sunt praesentium vero sequi distinctio error quibusdam maiores natus magnam, explicabo hic sed alias dolores, quis eum! Reprehenderit atque cupiditate dolorum? Saepe, doloribus veniam? Nulla!</p>
+      </div> 
+   </div>
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-3">
+      <label for="tab-3">Tab 3</label>
+      <div class="tab__content">
+         <h4>Tab heading 3</h4>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam officiis voluptas maiores deserunt ullam aliquam?</p>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, officia accusantium quod fuga porro eius animi earum excepturi omnis! Reprehenderit!</p>
+      </div> 
+   </div>
+   <div class="tab">
+      <input type="radio" name="tabgroup" id="tab-4">
+      <label for="tab-4">Tab 4</label>
+      <div class="tab__content">
+         <h4>Tab heading 4</h4>
+         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia exercitationem veritatis vero eaque. Nam totam dolorem sapiente ullam non sed nostrum praesentium voluptatem, ad quam libero deserunt nemo fuga hic repudiandae veritatis cupiditate, mollitia recusandae!</p>
+      </div> 
+   </div>
 </div>
 
 <script> 
-	function openPage(pageName, elmnt, color) {
-		// Hide all elements with class="tabcontent" by default */
-		var i, tabcontent, tablinks;
-		tabcontent = document.getElementsByClassName("tabcontent");
-		for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		}
+	(function($, document) {
+	    
+	      // get tallest tab__content element
+	      let height = -1;
 
-		// Remove the background color of all tablinks/buttons
-		tablinks = document.getElementsByClassName("tablink");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].style.backgroundColor = "";
-		}
-
-		// Show the specific tab content
-		document.getElementById(pageName).style.display = "block";
-
-		// Add the specific color to the button used to open the tab content
-		elmnt.style.backgroundColor = color;
-	}
-
-	// Get the element with id="defaultOpen" and click on it
-	document.getElementById("defaultOpen").click();
+			$('.tab__content').each(function() {
+				height = height > $(this).outerHeight() ? height : $(this).outerHeight();
+	         $(this).css('position', 'absolute');
+			});
+	      
+	      // set height of tabs + top offset
+			$('[data-tabs]').css('min-height', height + 40 + 'px');
+	   
+	}(jQuery, document));
 </script>
 </html>
