@@ -67,7 +67,7 @@ header {
 		}
 }
 
-.yellow-bar {
+.underline {
 		position: absolute;
 		z-index: 10;
 		bottom: 0;
@@ -79,17 +79,17 @@ header {
 		-webkit-transition: left .2s ease;
 }
 
-#tab1-tab.active ~ span.yellow-bar {
+#tab1-tab.active ~ span.underline {
 		left: 0;
 		width: 80px;
 }
 
-#tab2-tab.active ~ span.yellow-bar {
+#tab2-tab.active ~ span.underline {
 		left:85px;
 		width: 130px;
 }
 
-#tab3-tab.active ~ span.yellow-bar {
+#tab3-tab.active ~ span.underline {
 		left: 135px;
 		width: 200px;
 }
@@ -103,7 +103,7 @@ header {
 						<a id="tab1-tab" href="#tab1" class="active">Welcome</a>
 						<a id="tab2-tab" href="#tab2">About me</a>
 						<a id="tab3-tab" href="#tab3">Contact</a>
-						<span class="yellow-bar"></span>
+						<span class="underline"></span>
 				</div>
 		</header>
 
