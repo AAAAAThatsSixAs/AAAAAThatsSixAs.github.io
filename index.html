@@ -2,346 +2,175 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
 
-.tabs {
-  z-index: 15px;
-  position: relative;
-  background: #FFFFFF;
-  width: 600px;
-  border-radius: 4px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  margin: 100px auto 10px;
-  overflow: hidden;
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,600,600italic,700,700italic);
+body {
+		font-family: 'Roboto';
+		background-color: #f9f9f9;
 }
 
-.tabs-header {
-  position: relative;
-  background: #4285F4;
-  overflow: hidden;
+.container{
+	height:500px;
+	width:580px;
+	padding:0;
+	margin:10px;
+	border-radius:5px;
+	box-shadow: 0 2px 3px rgba(0,0,0,.3)
+	
 }
 
-.tabs-header .border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #F4B142;
-  width: auto;
-  height: 2px;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
+header {
+		position: relative;
 }
 
-.tabs-header ul {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  width: calc(100% - 68px);
+.hide {
+		display: none;
 }
 
-.tabs-header li {
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
+.tab-content {
+		padding:25px;
 }
 
-.tabs-header a {
-  z-index: 1;
-  display: block;
-  box-sizing: border-box;
-  padding: 15px 20px;
-  color: #FFFFFF;
-  font-weight: 500;
-  text-decoration: none;
-  text-transform: uppercase;
+#material-tabs {
+		position: relative;
+		display: block;
+	  padding:0;
+		border-bottom: 1px solid #e0e0e0;
 }
 
-.tabs-nav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: #4285F4;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  padding: 0 10px;
-  color: #FFFFFF;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+#material-tabs>a {
+		position: relative;
+	 display:inline-block;
+		text-decoration: none;
+		padding: 22px;
+		text-transform: uppercase;
+		font-size: 14px;
+		font-weight: 600;
+		color: #424f5a;
+		text-align: center;
+		outline:;
 }
 
-.tabs-nav:before {
-  content: '';
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  box-shadow: 0 0 20px 10px #4285F4;
+#material-tabs>a.active {
+		font-weight: 700;
+		outline:none;
 }
 
-.tabs-nav i {
-  border-radius: 100%;
-  cursor: pointer;
+#material-tabs>a:not(.active):hover {
+		background-color: inherit;
+		color: #7c848a;
 }
 
-.tabs-content {
-  position: relative;
-  padding: 15px 20px;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-  overflow: hidden;
+@media only screen and (max-width: 520px) {
+		.nav-tabs#material-tabs>li>a {
+				font-size: 11px;
+		}
 }
 
-.tabs-content:after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 1px;
-  box-shadow: 0 0 20px 10px #FFFFFF;
+.yellow-bar {
+		position: absolute;
+		z-index: 10;
+		bottom: 0;
+		height: 3px;
+		background: #458CFF;
+		display: block;
+		left: 0;
+		transition: left .2s ease;
+		-webkit-transition: left .2s ease;
 }
 
-.tabs-content .tab { display: none; }
-
-.tabs-content .tab.active { display: block; }
-
-[ripple] {
- z-index: 1;
- position: relative;
- overflow: hidden;
+#tab1-tab.active ~ span.yellow-bar {
+		left: 0;
+		width: 160px;
 }
 
-[ripple] .ripple {
-  position: absolute;
-  background: #FFFFFF;
-  width: 12px;
-  height: 12px;
-  border-radius: 100%;
-  -webkit-animation: ripple 1.6s;
-  animation: ripple 1.6s;
+#tab2-tab.active ~ span.yellow-bar {
+		left:165px;
+		width: 82px;
 }
 
-@-webkit-keyframes 
-ripple {  0% {
- -webkit-transform: scale(1);
- transform: scale(1);
- opacity: 0.2;
-}
- 100% {
- -webkit-transform: scale(40);
- transform: scale(40);
- opacity: 0;
-}
+#tab3-tab.active ~ span.yellow-bar {
+		left: 253px;
+		width: 135px;
 }
 
-@keyframes 
-ripple {  0% {
- -webkit-transform: scale(1);
- transform: scale(1);
- opacity: 0.2;
-}
- 100% {
- -webkit-transform: scale(40);
- transform: scale(40);
- opacity: 0;
-}
+#tab4-tab.active ~ span.yellow-bar {
+		left:392px;
+		width: 163px;
 }
 
 </style>
 <body>
 
-<div class="tabs">
-  <div class="tabs-header">
-    <div class="border"></div>
-    <ul>
-      <li class="active"><a href="#tab-1" tab-id="1" ripple="ripple" ripple-color="#FFF">Tab 1</a></li>
-      <li><a href="#tab-2" tab-id="2" ripple="ripple" ripple-color="#FFF">Tab 2</a></li>
-      <li><a href="#tab-3" tab-id="3" ripple="ripple" ripple-color="#FFF">Tab 3</a></li>
-    </ul>
-    <nav class="tabs-nav">
-      <i id="prev" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE314;</i>
-      <i id="next" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE315;</i>
-    </nav>
-  </div>
-  <div class="tabs-content">
-    <div tab-id="1" class="tab active">Tabbed Content 1</div>
-    <div tab-id="2" class="tab">Tabbed Content 2/div>
-    <div tab-id="3" class="tab">Tabbed Content 3</div>
-  </div>
+<div class="container">
+		<header>
+				<div id="material-tabs">
+						<a id="tab1-tab" href="#tab1" class="active">DEFISCALISATION</a>
+						<a id="tab2-tab" href="#tab2">AUDIT</a>
+						<a id="tab3-tab" href="#tab3">DECLARATION</a>
+						<a id="tab4-tab" href="#tab4">GESTION D'ACTIFS</a>
+						<span class="yellow-bar"></span>
+				</div>
+		</header>
+
+		<div class="tab-content">
+				<div id="tab1">
+						<p>There are three basic ideas invoved in creating these tabs:</p>
+						<ol>
+								<li>Use anchor tags as tabs.</li>
+								<li>Use a span class for the tab highlight.</li>
+							<li>In your CSS, adjust the <strong>position</strong> of the highlight, as well as it's <strong>width</strong>, by detecting the anchor tag with an 'active' class. Then adjust its left property and width property. Add a transition in your CSS, <em>et voil&agrave;</em>.</li>
+						</ol>
+				</div>
+				<div id="tab2">
+						<p>Second tab content.</p>
+				</div>
+				<div id="tab3">
+						<p>Third tab content.</p>
+				</div>
+							<div id="tab4">
+						<p>Third tab content.</p>
+				</div>
+		</div>
 </div>
+<!-- end container -->
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 
-// Intial Border Position
-var activePos = $('.tabs-header .active').position();
+<script> 
 
-// Change Position
-function changePos() {
+$(document).ready(function() {
+		$('#material-tabs').each(function() {
 
-  // Up<a href="https://www.jqueryscript.net/time-clock/">date</a> Position
-  activePos = $('.tabs-header .active').position();
+				var $active, $content, $links = $(this).find('a');
 
-  // Change Position & Width
-  $('.border').stop().css({
-    left: activePos.left,
-    width: $('.tabs-header .active').width()
-  });
-}
+				$active = $($links[0]);
+				$active.addClass('active');
 
-changePos();
+				$content = $($active[0].hash);
 
-// Intial Tab Height
-var tabHeight = $('.tab.active').height();
+				$links.not($active).each(function() {
+						$(this.hash).hide();
+				});
 
-// Animate Tab Height
-function animateTabHeight() {
+				$(this).on('click', 'a', function(e) {
 
-  // Update Tab Height
-  tabHeight = $('.tab.active').height();
+						$active.removeClass('active');
+						$content.hide();
 
-  // Animate Height
-  $('.tabs-content').stop().css({
-    height: tabHeight + 'px'
-  });
-}
+						$active = $(this);
+						$content = $(this.hash);
 
-animateTabHeight();
+						$active.addClass('active');
+						$content.show();
 
-// Change Tab
-function changeTab() {
-  var getTabId = $('.tabs-header .active a').attr('tab-id');
-
-  // Remove Active State
-  $('.tab').stop().fadeOut(300, function () {
-    // Remove Class
-    $(this).removeClass('active');
-  }).hide();
-
-  $('.tab[tab-id=' + getTabId + ']').stop().fadeIn(300, function () {
-    // Add Class
-    $(this).addClass('active');
-
-    // Animate Height
-    animateTabHeight();
-  });
-}
-
-// Tabs
-$('.tabs-header a').on('click', function (e) {
-  e.preventDefault();
-
-  // Tab Id
-  var tabId = $(this).attr('tab-id');
-
-  // Remove Active State
-  $('.tabs-header a').stop().parent().removeClass('active');
-
-  // Add Active State
-  $(this).stop().parent().addClass('active');
-
-  changePos();
-
-  // Update Current Itm
-  tabCurrentItem = tabItems.filter('.active');
-
-  // Remove Active State
-  $('.tab').stop().fadeOut(300, function () {
-    // Remove Class
-    $(this).removeClass('active');
-  }).hide();
-
-  // Add Active State
-  $('.tab[tab-id="' + tabId + '"]').stop().fadeIn(300, function () {
-    // Add Class
-    $(this).addClass('active');
-
-    // Animate Height
-    animateTabHeight();
-  });
-});
-
-// Tab Items
-var tabItems = $('.tabs-header ul li');
-
-// Tab Current Item
-var tabCurrentItem = tabItems.filter('.active');
-
-// Next Button
-$('#next').on('click', function (e) {
-  e.preventDefault();
-
-  var nextItem = tabCurrentItem.next();
-
-  tabCurrentItem.removeClass('active');
-
-  if (nextItem.length) {
-    tabCurrentItem = nextItem.addClass('active');
-  } else {
-    tabCurrentItem = tabItems.first().addClass('active');
-  }
-
-  changePos();
-  changeTab();
-});
-
-// Prev Button
-$('#prev').on('click', function (e) {
-  e.preventDefault();
-
-  var prevItem = tabCurrentItem.prev();
-
-  tabCurrentItem.removeClass('active');
-
-  if (prevItem.length) {
-    tabCurrentItem = prevItem.addClass('active');
-  } else {
-    tabCurrentItem = tabItems.last().addClass('active');
-  }
-
-  changePos();
-  changeTab();
-});
-
-$('[ripple]').on('click', function (e) {
-  var rippleDiv = $('<div class="ripple" />'),
-    rippleOffset = $(this).offset(),
-    rippleY = e.pageY - rippleOffset.top,
-    rippleX = e.pageX - rippleOffset.left,
-    ripple = $('.ripple');
-
-  rippleDiv.css({
-    top: rippleY - (ripple.height() / 2),
-    left: rippleX - (ripple.width() / 2),
-    background: $(this).attr("ripple-color")
-  }).appendTo($(this));
-
-  window.setTimeout(function () {
-    rippleDiv.remove();
-  }, 1500);
+						e.preventDefault();
+				});
+		});
 });
 
 </script>
