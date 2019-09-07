@@ -1,6 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
-@import url(http://fonts.googleapis.com/css?family=Glegoo);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Glegoo);
 body {
   font-family: "Roboto", sans-serif;
 }
@@ -1266,7 +1266,7 @@ article {
   color: #9bc4e2;
 }
 
-/*THIS ONE I THINK*/
+/*THIS ONE I THINK FRONT PAGE TEXT CD THING*/
 .cd-headline.slide .cd-words-wrapper {
   color: #9bc400;
 }
